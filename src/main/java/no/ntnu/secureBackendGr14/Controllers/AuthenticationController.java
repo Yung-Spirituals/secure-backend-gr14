@@ -33,13 +33,13 @@ public class AuthenticationController
             this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     authenticationRequest.getUsername(),
                     authenticationRequest.getPassword()));
-            final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
-            final String jwtUtil = this.jwtUtil.generateToken(userDetails);
-            return ResponseEntity.ok(new AuthenticationResponse(jwtUtil));
         }
         catch (BadCredentialsException e)
         {
             return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
         }
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+        final String jwtUtil = this.jwtUtil.generateToken(userDetails);
+        return ResponseEntity.ok(new AuthenticationResponse(jwtUtil));
     }
 }
