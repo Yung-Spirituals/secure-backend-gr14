@@ -1,4 +1,4 @@
-package no.ntnu.secureBackendGr14.Controllers;
+package no.ntnu.secureBackendGr14.controllers;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,14 +18,12 @@ public class TestController
     }
 
     @GetMapping("/user")
-    @PreAuthorize("hasRole('USER')")
     public String testUser()
     {
         return "This is user level :D";
     }
 
     @GetMapping("/admin")
-    @PreAuthorize("hasRole('ADMIN')")
     public String testAdmin()
     {
         return "This is admin level!!! ;D";

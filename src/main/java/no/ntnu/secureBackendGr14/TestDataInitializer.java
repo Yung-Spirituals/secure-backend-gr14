@@ -28,12 +28,15 @@ public class TestDataInitializer implements ApplicationListener<ApplicationReady
     Optional<User> existingUser = userRepository.findByUsername("Aron");
     if (existingUser.isEmpty()){
       logger.info("Importing test data...");
-      User potato = new User("potato", "1234");
-      User onion = new User("onion","onion");
-      User tomato = new User("tomato", "5555");
+      //password is 1234
+      User potato = new User("potato", "$2a$12$l0UlrXdiiYc8oQTeaP/7cuT0480jGj9x12.NPRwu4ThwHiYLtQ6Me");
+      //password is onion
+      User onion = new User("onion","$2a$12$ACv9t2jxzVIS8XfqS45XGejGRr4m3caVlJU.9ntxeP/rt.ixo.gAy");
+      //password is 5555
+      User tomato = new User("tomato", "$2a$12$10xmupguHxpRMGYOaclPEOlHN8PuHTdfg.B/Dj4PM7LIe0sjPrDrm");
 
-      Role user = new Role("USER");
-      Role admin = new Role("ADMIN");
+      Role user = new Role("ROLE_USER");
+      Role admin = new Role("ROLE_ADMIN");
 
       potato.addRole(user);
       potato.addRole(admin);

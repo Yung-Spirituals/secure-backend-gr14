@@ -1,12 +1,12 @@
 ----------------------------------------------------------------
-Thu Apr 07 04:40:43 CEST 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0180-01e5-41d2-000002f4c728 
-on database directory memory:D:\projects\secure-backend-gr14\local with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@1d44bcfa 
+Thu Apr 07 11:36:07 CEST 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0180-0361-8dc1-000002229f08 
+on database directory memory:C:\Users\arons\OneDrive\Documents\Projects\secureBackendGr14\local with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@1d44bcfa 
 Loaded from file:/C:/Users/arons/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
-java.vendor=Eclipse Adoptium
-java.runtime.version=17.0.2+8
-user.dir=D:\projects\secure-backend-gr14
-os.name=Windows 11
+java.vendor=Oracle Corporation
+java.runtime.version=17.0.2+8-86
+user.dir=C:\Users\arons\OneDrive\Documents\Projects\secureBackendGr14
+os.name=Windows 10
 os.arch=amd64
 os.version=10.0
 derby.system.home=null
