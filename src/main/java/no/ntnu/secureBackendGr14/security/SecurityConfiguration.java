@@ -23,7 +23,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  */
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class    SecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     /**
      * A service providing our users from the database
      */
@@ -58,6 +58,8 @@ public class    SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/api/admin").hasRole("ADMIN")
                 .antMatchers("/api/user").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/api/product").hasRole("ADMIN")
+                .antMatchers("/api/get-products").permitAll()
                 .antMatchers("/api/").permitAll()
                 .antMatchers("/authenticate").permitAll()
                 .anyRequest().authenticated()
@@ -66,9 +68,6 @@ public class    SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         // Enable our JWT authentication filter
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-
-        // Necessary authorization for each endpoint will be configured by each method,
-        // using @PreAuthorize
     }
 
     /**
