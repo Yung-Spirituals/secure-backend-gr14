@@ -2,6 +2,7 @@ package no.ntnu.secureBackendGr14.models;
 
 import javax.persistence.*;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity(name = "users")
@@ -15,6 +16,12 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new LinkedHashSet<>();
+
+    @OneToMany
+    private List<ShoppingCart> ShoppingCarts;
+
+    @OneToMany
+    private List<Order> orders;
 
     private String username;
     private String password;
@@ -71,6 +78,22 @@ public class User {
         this.roles = roles;
     }
 
+    public List<ShoppingCart> getShoppingCarts() {
+        return this.ShoppingCarts;
+    }
+
+    public void setShoppingCarts(List<ShoppingCart> shoppingCarts) {
+        this.ShoppingCarts = shoppingCarts;
+    }
+
+    public List<Order> getOrders() {
+        return this.orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
     /**
      * Adds a role to the user.
      *
@@ -121,7 +144,7 @@ public class User {
      *
      * @return user activity.
      */
-    public boolean getActive() {
+    public boolean isActive() {
         return this.active;
     }
 

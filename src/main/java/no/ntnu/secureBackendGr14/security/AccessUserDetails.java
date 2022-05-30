@@ -21,7 +21,7 @@ public class AccessUserDetails implements UserDetails {
     public AccessUserDetails(User user) {
         this.username = user.getUsername();
         this.password = user.getPassword();
-        this.active = user.getActive();
+        this.active = user.isActive();
         getRoles(user.getRoles());
     }
 

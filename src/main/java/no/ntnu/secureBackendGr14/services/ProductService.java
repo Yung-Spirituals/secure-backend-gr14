@@ -1,6 +1,5 @@
 package no.ntnu.secureBackendGr14.services;
 
-import no.ntnu.secureBackendGr14.models.AddProductRequest;
 import no.ntnu.secureBackendGr14.models.Product;
 import no.ntnu.secureBackendGr14.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +16,9 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public String update(Long productId, AddProductRequest updatedInfo) {
+    public String update(Long productId, Product updatedInfo) {
         String errorMessage = null;
-        if (productExists(productId)) {
+        if (productExists(productId) && verifyProduct(updatedInfo)) {
             try {
                 Product product = productRepository.getById(productId);
                 product.setName(updatedInfo.getName());
@@ -51,9 +50,9 @@ public class ProductService {
         return errorMessage;
     }
 
-    public String add(AddProductRequest product) {
+    public String add(Product product) {
         String errorMessage = null;
-        if (verifyProduct(product)) {
+        if (!verifyProduct(product) && productRepository.findByName(product.getName()).isPresent()) {
             errorMessage = "Product data invalid!";
         }
         if (errorMessage == null) {
@@ -67,9 +66,9 @@ public class ProductService {
         return errorMessage;
     }
 
-    private boolean verifyProduct(AddProductRequest product) {
+    private boolean verifyProduct(Product product) {
         return !product.getName().isBlank() && !product.getDescription().isBlank()
-                && !product.getImage_path().isBlank() && productRepository.findByName(product.getName()).isEmpty();
+                && !product.getImage_path().isBlank();
     }
 
     private boolean productExists(Long productId) {

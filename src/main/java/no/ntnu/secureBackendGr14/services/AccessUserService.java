@@ -1,7 +1,8 @@
-package no.ntnu.secureBackendGr14.security;
+package no.ntnu.secureBackendGr14.services;
 
 import no.ntnu.secureBackendGr14.models.User;
 import no.ntnu.secureBackendGr14.repositories.UserRepository;
+import no.ntnu.secureBackendGr14.security.AccessUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
