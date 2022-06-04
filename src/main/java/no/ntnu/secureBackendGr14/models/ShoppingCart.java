@@ -40,8 +40,8 @@ public class ShoppingCart {
         this.product = product;
     }
 
-    public User getUser() {
-        return this.user;
+    public String getUsername() {
+        return this.user.getUsername();
     }
 
     public void setUser(User user) {
