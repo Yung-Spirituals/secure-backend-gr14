@@ -26,7 +26,6 @@ public class ShoppingCartService {
     public String addToCarts(String username, Long productId, Integer quantity) {
         boolean alreadyInCart = false;
         try {
-            Long id = null;
             User user = null;
             if (userRepository.findByUsername(username).isPresent()) {
                 user = userRepository.findByUsername(username).get();

@@ -66,7 +66,7 @@ public class ApiController {
         }
     }
 
-    @PatchMapping("/product/{productId}")
+    @PutMapping("/product/{productId}")
     public ResponseEntity<?> updateProduct(@PathVariable Long productId,
                                            @RequestBody Product updatedProduct) {
         String status = productService.update(productId, updatedProduct);
@@ -102,7 +102,7 @@ public class ApiController {
         }
     }
 
-    @PostMapping("/cart/{productId}/{quantity}")
+    @PutMapping("/cart/{productId}/{quantity}")
     public ResponseEntity<?> updateCart(@PathVariable Long productId,
                                         @PathVariable Integer quantity,
                                         @RequestHeader Authorization authorization){
