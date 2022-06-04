@@ -31,11 +31,13 @@ public class ShoppingCartService {
                 user = userRepository.findByUsername(username).get();
             }
             if (user != null) {
-                for (ShoppingCart shoppingCart : user.getShoppingCarts()) {
-                    if (shoppingCart.getProduct().getId().equals(productId)) {
-                        shoppingCart.setQuantity(quantity);
-                        shoppingCartRepository.save(shoppingCart);
-                        alreadyInCart = true;
+                if (user.getShoppingCarts() != null) {
+                    for (ShoppingCart shoppingCart : user.getShoppingCarts()) {
+                        if (shoppingCart.getProduct().getId().equals(productId)) {
+                            shoppingCart.setQuantity(quantity);
+                            shoppingCartRepository.save(shoppingCart);
+                            alreadyInCart = true;
+                        }
                     }
                 }
                 if (!alreadyInCart && quantity > 0) {
@@ -54,11 +56,12 @@ public class ShoppingCartService {
     public String removeFromCarts(String username, Long productId){
         String errorMessage = null;
         if (userRepository.findByUsername(username).isPresent()) {
-            Long id = userRepository.findByUsername(username).get().getId();
-            User user = userRepository.getById(id);
-            for (ShoppingCart shoppingCart : user.getShoppingCarts()) {
-                if (shoppingCart.getProduct().getId().equals(productId)) {
-                    shoppingCartRepository.delete(shoppingCart);
+            User user = userRepository.findByUsername(username).get();
+            if (user.getShoppingCarts() != null){
+                for (ShoppingCart shoppingCart : user.getShoppingCarts()) {
+                    if (shoppingCart.getProduct().getId().equals(productId)) {
+                        shoppingCartRepository.delete(shoppingCart);
+                    }
                 }
             }
         }
@@ -70,7 +73,11 @@ public class ShoppingCartService {
         if (userRepository.findByUsername(username).isPresent()) {
             id = userRepository.findByUsername(username).get().getId();
         }
-        return shoppingCartRepository.findAllByUserId(id);
+        if (id != null) {
+            return shoppingCartRepository.findAllByUserId(id);
+        } else {
+            return null;
+        }
     }
 
     public boolean deleteCarts(String username){
