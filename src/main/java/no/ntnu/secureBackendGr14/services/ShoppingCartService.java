@@ -34,8 +34,9 @@ public class ShoppingCartService {
                 if (user.getShoppingCarts() != null) {
                     for (ShoppingCart shoppingCart : user.getShoppingCarts()) {
                         if (shoppingCart.getProduct().getId().equals(productId)) {
-                            shoppingCart.setQuantity(quantity);
-                            shoppingCartRepository.save(shoppingCart);
+                            ShoppingCart cartInDb = shoppingCartRepository.getById(shoppingCart.getId());
+                            cartInDb.setQuantity(quantity);
+                            shoppingCartRepository.save(cartInDb);
                             alreadyInCart = true;
                         }
                     }
