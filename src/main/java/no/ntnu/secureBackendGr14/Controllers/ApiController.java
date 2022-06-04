@@ -78,12 +78,12 @@ public class ApiController {
     }
 
     @GetMapping("/cart")
-    public List<ShoppingCart> getCart(@RequestHeader Authorization authorization){
+    public List<ShoppingCart> getCart(@RequestHeader("authorization") String authorization){
         return shoppingCartService.getCarts(getUsername(authorization));
     }
 
     @DeleteMapping("/cart/{productId}")
-    public ResponseEntity<?> removeCart(@RequestHeader Authorization authorization,
+    public ResponseEntity<?> removeCart(@RequestHeader("authorization") String authorization,
                                         @RequestParam Long productId){
         String status = shoppingCartService.removeFromCarts(getUsername(authorization), productId);
         if (status == null){
@@ -94,8 +94,8 @@ public class ApiController {
     }
 
     @DeleteMapping("/cart")
-    public ResponseEntity<?> emptyCart(@RequestHeader Authorization authorization){
-        if (shoppingCartService.deleteCarts(getUsername(authorization))){
+    public ResponseEntity<?> emptyCart(@RequestHeader("authorization") String authorization){
+        if (shoppingCartService.deleteCarts(authorization)){
         return new ResponseEntity<>(HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -105,7 +105,7 @@ public class ApiController {
     @PutMapping("/cart/{productId}/{quantity}")
     public ResponseEntity<?> updateCart(@PathVariable Long productId,
                                         @PathVariable Integer quantity,
-                                        @RequestHeader Authorization authorization){
+                                        @RequestHeader("authorization") String authorization){
         String status = shoppingCartService.addToCarts(getUsername(authorization), productId, quantity);
         if (status == null) {
             return new ResponseEntity<>(HttpStatus.OK);
@@ -124,7 +124,7 @@ public class ApiController {
         return authHeader.substring(8);
     }
 
-    private String getUsername(Authorization authorization){
-        return jwtUtil.extractUsername(getJwtFromHeader(authorization.toString()));
+    private String getUsername(String authorization){
+        return jwtUtil.extractUsername(getJwtFromHeader(authorization));
     }
 }
