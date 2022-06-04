@@ -42,8 +42,8 @@ public class ApiController {
     }
 
     @GetMapping("/get-products")
-    public List<Product> getProducts() {
-        return productService.getProducts();
+    public ResponseEntity<?> getProducts() {
+        return new ResponseEntity<>(productService.getProducts(), HttpStatus.OK);
     }
 
     @PostMapping("/product")
@@ -78,8 +78,8 @@ public class ApiController {
     }
 
     @GetMapping("/cart")
-    public List<ShoppingCart> getCart(@RequestHeader("authorization") String authorization){
-        return shoppingCartService.getCarts(getUsername(authorization));
+    public ResponseEntity<?> getCart(@RequestHeader("authorization") String authorization){
+        return new ResponseEntity<>(shoppingCartService.getCarts(getUsername(authorization)), HttpStatus.OK);
     }
 
     @DeleteMapping("/cart/{productId}")

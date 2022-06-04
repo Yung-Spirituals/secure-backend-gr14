@@ -14,7 +14,7 @@ public class ShoppingCart {
     @ManyToOne
     private User user;
 
-    private Integer quantity;
+    private int quantity;
 
     public ShoppingCart() {}
 
@@ -48,7 +48,7 @@ public class ShoppingCart {
         this.user = user;
     }
 
-    public Integer getQuantity() {
+    public int getQuantity() {
         return this.quantity;
     }
 
