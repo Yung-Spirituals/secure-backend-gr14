@@ -9,11 +9,9 @@ public class ShoppingCart {
     private Long id;
 
     @ManyToOne(cascade = {CascadeType.REMOVE})
-    @JoinColumn
     private Product product;
 
     @ManyToOne(cascade = {CascadeType.REMOVE})
-    @JoinColumn
     private User user;
 
     private int quantity;
