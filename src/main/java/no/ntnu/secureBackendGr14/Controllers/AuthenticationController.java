@@ -46,14 +46,4 @@ public class AuthenticationController {
     }
 
     //TODO: implement method
-    @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody User user) {
-        String error = userService.registerUser(user.getUsername(), user.getPassword());
-        if(error == null){
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
-        else{
-            return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
-        }
-    }
 }

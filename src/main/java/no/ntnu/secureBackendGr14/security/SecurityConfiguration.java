@@ -65,6 +65,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/cart/{productId}").permitAll()
                 .antMatchers("/api/").permitAll()
                 .antMatchers("/authenticate").permitAll()
+                .antMatchers("/api/register").anonymous()
                 .anyRequest().authenticated()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);

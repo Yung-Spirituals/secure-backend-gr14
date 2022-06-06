@@ -4,9 +4,11 @@ import no.ntnu.secureBackendGr14.models.Product;
 import no.ntnu.secureBackendGr14.security.JwtUtil;
 import no.ntnu.secureBackendGr14.services.ProductService;
 import no.ntnu.secureBackendGr14.services.ShoppingCartService;
+import no.ntnu.secureBackendGr14.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -19,6 +21,9 @@ public class ApiController {
 
     @Autowired
     private ShoppingCartService shoppingCartService;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private JwtUtil jwtUtil;
@@ -96,6 +101,17 @@ public class ApiController {
         return new ResponseEntity<>(HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody User user) {
+        String error = userService.registerUser(user.getUsername(), user.getPassword());
+        if(error == null){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
         }
     }
 
