@@ -1,17 +1,14 @@
 package no.ntnu.secureBackendGr14.Controllers;
 
 import no.ntnu.secureBackendGr14.models.Product;
-import no.ntnu.secureBackendGr14.models.ShoppingCart;
 import no.ntnu.secureBackendGr14.security.JwtUtil;
 import no.ntnu.secureBackendGr14.services.ProductService;
 import no.ntnu.secureBackendGr14.services.ShoppingCartService;
-import org.apache.tomcat.util.http.parser.Authorization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -102,6 +99,13 @@ public class ApiController {
         }
     }
 
+    /**
+     *
+     * @param productId
+     * @param quantity
+     * @param authorization
+     * @return
+     */
     @PutMapping("/cart/{productId}/{quantity}")
     public ResponseEntity<?> updateCart(@PathVariable Long productId,
                                         @PathVariable Integer quantity,

@@ -47,7 +47,7 @@ public class Product {
     }
 
     /**
-     * Set the id of the product.
+     * The id gets generated, that is why this method is never used.
      *
      * @param id to be set for the product.
      */
