@@ -4,12 +4,14 @@ import no.ntnu.secureBackendGr14.security.AccessUserDetails;
 import no.ntnu.secureBackendGr14.security.AuthenticationResponse;
 import no.ntnu.secureBackendGr14.security.AuthenticationRequest;
 import no.ntnu.secureBackendGr14.security.JwtUtil;
+import no.ntnu.secureBackendGr14.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -24,6 +26,8 @@ public class AuthenticationController {
     private AuthenticationManager authenticationManager;
     @Autowired
     private UserDetailsService userDetailsService;
+    @Autowired
+    private UserService userService;
     @Autowired
     private JwtUtil jwtUtil;
 
@@ -43,7 +47,13 @@ public class AuthenticationController {
 
     //TODO: implement method
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody AuthenticationRequest authenticationRequest) {
-        return null;
+    public ResponseEntity<?> register(@RequestBody User user) {
+        String error = userService.registerUser(user.getUsername(), user.getPassword());
+        if(error == null){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+        }
     }
 }
