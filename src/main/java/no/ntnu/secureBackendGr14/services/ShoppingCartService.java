@@ -55,7 +55,7 @@ public class ShoppingCartService {
         String errorMessage = null;
         if (userRepository.findByUsername(username).isPresent()) {
             User user = userRepository.findByUsername(username).get();
-            if (user.getShoppingCarts() != null){
+            if (user.getShoppingCarts().isEmpty()){
                 for (ShoppingCart shoppingCart : user.getShoppingCarts()) {
                     if (shoppingCart.getProduct().getId().equals(productId)) {
                         shoppingCartRepository.delete(shoppingCart);
