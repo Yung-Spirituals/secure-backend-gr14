@@ -1,6 +1,7 @@
 package no.ntnu.secureBackendGr14.Controllers;
 
 import no.ntnu.secureBackendGr14.models.Product;
+import no.ntnu.secureBackendGr14.models.Register;
 import no.ntnu.secureBackendGr14.security.JwtUtil;
 import no.ntnu.secureBackendGr14.services.ProductService;
 import no.ntnu.secureBackendGr14.services.ShoppingCartService;
@@ -105,7 +106,7 @@ public class ApiController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody User user) {
+    public ResponseEntity<?> register(@RequestBody Register user) {
         String error = userService.registerUser(user.getUsername(), user.getPassword());
         if(error == null){
             return new ResponseEntity<>(HttpStatus.OK);
