@@ -6,8 +6,12 @@ import no.ntnu.secureBackendGr14.repositories.ProductRepository;
 import no.ntnu.secureBackendGr14.repositories.ShoppingCartRepository;
 import no.ntnu.secureBackendGr14.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -25,31 +29,24 @@ public class ShoppingCartService {
     //TODO: make error message more specific
     public String addToCarts(String username, Long productId, Integer quantity) {
         boolean alreadyInCart = false;
-        try {
-            User user = null;
-            if (userRepository.findByUsername(username).isPresent()) {
-                user = userRepository.findByUsername(username).get();
-            }
-            if (user != null) {
-                if (user.getShoppingCarts() != null) {
-                    for (ShoppingCart shoppingCart : user.getShoppingCarts()) {
-                        if (shoppingCart.getProduct().getId().equals(productId)) {
-                            ShoppingCart cartInDb = shoppingCartRepository.getById(shoppingCart.getId());
-                            cartInDb.setQuantity(quantity);
-                            shoppingCartRepository.save(cartInDb);
-                            alreadyInCart = true;
-                        }
-                    }
+        if (userRepository.findByUsername(username).isPresent()){
+            User user = userRepository.findByUsername(username).get();
+            for (ShoppingCart shoppingCart : user.getShoppingCarts()){
+                if (shoppingCart.getProduct().getId().equals(productId)){
+                    ShoppingCart cart = shoppingCartRepository.getById(shoppingCart.getId());
+                    cart.setQuantity(quantity);
                 }
-                if (!alreadyInCart && quantity > 0) {
-                    shoppingCartRepository.save(
-                            new ShoppingCart(user, productRepository.getById(productId), quantity));
-                }
+                alreadyInCart = true;
             }
-        } catch (Exception e){
-            return "Error: " + e.getMessage();
+            if (!alreadyInCart || user.getShoppingCarts().isEmpty()){
+                shoppingCartRepository.save(new ShoppingCart(user, productRepository.getById(productId), quantity));
+            }
         }
         return null;
+    }
+
+    public void setShoppingCartInfoById(@Param("quantity") Integer quantity, @Param("user") Long user){
+
     }
 
 

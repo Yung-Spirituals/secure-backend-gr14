@@ -84,7 +84,7 @@ public class ApiController {
 
     @DeleteMapping("/cart/{productId}")
     public ResponseEntity<?> removeCart(@RequestHeader("authorization") String authorization,
-                                        @RequestParam Long productId){
+                                        @PathVariable Long productId){
         String status = shoppingCartService.removeFromCarts(getUsername(authorization), productId);
         if (status == null){
             return new ResponseEntity<>(HttpStatus.OK);
