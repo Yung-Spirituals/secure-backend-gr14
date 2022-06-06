@@ -8,13 +8,19 @@ public class ShoppingCart {
     @GeneratedValue
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.REMOVE})
+    @JoinColumn
     private Product product;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.REMOVE})
+    @JoinColumn
     private User user;
 
     private int quantity;
+
+    public User getUser() {
+        return user;
+    }
 
     public ShoppingCart() {}
 
