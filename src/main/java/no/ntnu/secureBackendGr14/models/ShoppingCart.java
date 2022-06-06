@@ -8,10 +8,10 @@ public class ShoppingCart {
     @GeneratedValue
     private Long id;
 
-    @ManyToOne(cascade = {CascadeType.REMOVE})
+    @ManyToOne(cascade = {CascadeType.REFRESH})
     private Product product;
 
-    @ManyToOne(cascade = {CascadeType.REMOVE})
+    @ManyToOne(cascade = {CascadeType.REFRESH})
     private User user;
 
     private int quantity;

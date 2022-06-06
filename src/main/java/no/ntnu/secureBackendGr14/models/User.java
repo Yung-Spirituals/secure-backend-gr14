@@ -17,7 +17,7 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new LinkedHashSet<>();
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.REMOVE})
     private List<ShoppingCart> ShoppingCarts;
 
     @OneToMany
