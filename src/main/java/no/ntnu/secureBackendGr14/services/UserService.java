@@ -13,8 +13,6 @@ public class UserService {
   UserRepository userRepository;
   @Autowired
   RoleRepository roleRepository;
-  @Autowired
-  PasswordEncoder passwordEncoder;
 
   public String registerUser(String username, String password){
     String errorMessage = null;
@@ -25,7 +23,7 @@ public class UserService {
       errorMessage = "Username is already taken";
     }
     if(errorMessage == null) {
-      User user = new User(username, passwordEncoder.encode(password));
+      User user = new User(username, password);
       if (roleRepository.findByName("USER").isPresent()){
         user.addRole(roleRepository.findByName("USER").get());
       }
