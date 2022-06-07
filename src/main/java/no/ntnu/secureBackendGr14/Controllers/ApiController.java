@@ -115,13 +115,6 @@ public class ApiController {
         }
     }
 
-    /**
-     *
-     * @param productId
-     * @param quantity
-     * @param authorization
-     * @return
-     */
     @PutMapping("/cart/{productId}/{quantity}")
     public ResponseEntity<?> updateCart(@PathVariable Long productId,
                                         @PathVariable Integer quantity,
