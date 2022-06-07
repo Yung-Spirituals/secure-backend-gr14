@@ -4,6 +4,7 @@ import no.ntnu.secureBackendGr14.models.User;
 import no.ntnu.secureBackendGr14.repositories.RoleRepository;
 import no.ntnu.secureBackendGr14.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,6 +13,8 @@ public class UserService {
   UserRepository userRepository;
   @Autowired
   RoleRepository roleRepository;
+  @Autowired
+  PasswordEncoder passwordEncoder;
 
   public String registerUser(String username, String password){
     String errorMessage = null;
@@ -22,7 +25,7 @@ public class UserService {
       errorMessage = "Username is already taken";
     }
     if(errorMessage == null) {
-      User user = new User(username, password);
+      User user = new User(username, passwordEncoder.encode(password));
       if (roleRepository.findByName("USER").isPresent()){
         user.addRole(roleRepository.findByName("USER").get());
       }
