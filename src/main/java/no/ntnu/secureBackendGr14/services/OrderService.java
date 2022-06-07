@@ -10,7 +10,7 @@ public class OrderService {
     @Autowired
     OrderRepository orderRepository;
 
-    public void addNewOrder(String Username){
+    public void addNewOrder(String Username) {
 
     }
 }

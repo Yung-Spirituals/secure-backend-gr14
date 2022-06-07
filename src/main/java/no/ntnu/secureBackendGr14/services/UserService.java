@@ -15,24 +15,26 @@ public class UserService {
   RoleRepository roleRepository;
   @Autowired
   PasswordEncoder passwordEncoder;
+
   /**
    * Checks if the username and password attributes are blank or the username is already taken.
    * If it does not then it registers a new user to the database, and gives it the user role.
+   *
    * @param username of user.
    * @param password of user.
    * @return either an error message or null.
    */
-  public String registerUser(String username, String password){
+  public String registerUser(String username, String password) {
     String errorMessage = null;
-    if(username.isBlank() || password.isBlank()){
+    if (username.isBlank() || password.isBlank()) {
       errorMessage = "Username or password field are blank";
     }
-    if(userRepository.findByUsername(username).isPresent()){
+    if (userRepository.findByUsername(username).isPresent()) {
       errorMessage = "Username is already taken";
     }
-    if(errorMessage == null) {
+    if (errorMessage == null) {
       User user = new User(username, passwordEncoder.encode(password));
-      if (roleRepository.findByName("USER").isPresent()){
+      if (roleRepository.findByName("USER").isPresent()) {
         user.addRole(roleRepository.findByName("USER").get());
       }
       userRepository.save(user);

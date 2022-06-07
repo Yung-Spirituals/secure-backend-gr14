@@ -47,7 +47,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     /**
      * Configure the authorization rules
-     *
      * @param http HTTP Security object
      * @throws Exception
      */

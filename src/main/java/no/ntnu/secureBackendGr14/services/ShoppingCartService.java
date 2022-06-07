@@ -29,28 +29,29 @@ public class ShoppingCartService {
     //TODO: make error message more specific
     public String addToCarts(String username, Long productId, Integer quantity) {
         boolean alreadyInCart = false;
-        if (userRepository.findByUsername(username).isPresent()){
+        if (userRepository.findByUsername(username).isPresent()) {
             User user = userRepository.findByUsername(username).get();
-            for (ShoppingCart shoppingCart : user.getShoppingCarts()){
-                if (shoppingCart.getProduct().getId().equals(productId)){
+            for (ShoppingCart shoppingCart : user.getShoppingCarts()) {
+                if (shoppingCart.getProduct().getId().equals(productId)) {
                     ShoppingCart cart = shoppingCartRepository.getById(shoppingCart.getId());
                     cart.setQuantity(quantity);
                 }
                 alreadyInCart = true;
             }
-            if (!alreadyInCart || user.getShoppingCarts().isEmpty()){
-                shoppingCartRepository.save(new ShoppingCart(user, productRepository.getById(productId), quantity));
+            if (!alreadyInCart || user.getShoppingCarts().isEmpty()) {
+                shoppingCartRepository.save(
+                    new ShoppingCart(user, productRepository.getById(productId), quantity));
             }
         }
         return null;
     }
 
     //TODO: make error message more specific
-    public String removeFromCarts(String username, Long productId){
+    public String removeFromCarts(String username, Long productId) {
         String errorMessage = null;
         if (userRepository.findByUsername(username).isPresent()) {
             User user = userRepository.findByUsername(username).get();
-            if (user.getShoppingCarts().isEmpty()){
+            if (user.getShoppingCarts().isEmpty()) {
                 for (ShoppingCart shoppingCart : user.getShoppingCarts()) {
                     if (shoppingCart.getProduct().getId().equals(productId)) {
                         shoppingCartRepository.delete(shoppingCart);
@@ -73,9 +74,10 @@ public class ShoppingCartService {
         }
     }
 
-    public boolean deleteCarts(String username){
+    public boolean deleteCarts(String username) {
         if (userRepository.findByUsername(username).isPresent()) {
-            shoppingCartRepository.deleteAll(userRepository.findByUsername(username).get().getShoppingCarts());
+            shoppingCartRepository.deleteAll(
+                userRepository.findByUsername(username).get().getShoppingCarts());
             return true;
         }
         return false;
