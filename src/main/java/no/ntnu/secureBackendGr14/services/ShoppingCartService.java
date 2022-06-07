@@ -45,11 +45,6 @@ public class ShoppingCartService {
         return null;
     }
 
-    public void setShoppingCartInfoById(@Param("quantity") Integer quantity, @Param("user") Long user){
-
-    }
-
-
     //TODO: make error message more specific
     public String removeFromCarts(String username, Long productId){
         String errorMessage = null;

@@ -1,5 +1,7 @@
 package no.ntnu.secureBackendGr14.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity(name = "shopping_carts")
@@ -11,6 +13,7 @@ public class ShoppingCart {
     @ManyToOne(cascade = {CascadeType.REFRESH})
     private Product product;
 
+    @JsonIgnore
     @ManyToOne(cascade = {CascadeType.REFRESH})
     private User user;
 

@@ -20,7 +20,7 @@ public class User {
     @OneToMany(cascade = {CascadeType.REMOVE})
     private List<ShoppingCart> ShoppingCarts;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.REMOVE})
     private List<Order> orders;
 
     private String username;
