@@ -1,5 +1,7 @@
 package no.ntnu.secureBackendGr14.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity(name = "orders")
@@ -12,8 +14,13 @@ public class Order {
     @ManyToOne
     private Product product;
 
+    @JsonIgnore
     @ManyToOne
     private User user;
+
+    private Long userId;
+
+    private String username;
 
     private Integer quantity;
 
@@ -27,6 +34,8 @@ public class Order {
         this.user = user;
         this.quantity = quantity;
         this.processed = false;
+        this.userId = user.getId();
+        this.username = user.getUsername();
     }
 
     public Long getId() {
@@ -51,6 +60,16 @@ public class Order {
 
     public void setUser(User user) {
         this.user = user;
+        this.userId = user.getId();
+        this.username = user.getUsername();
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public Integer getQuantity() {
