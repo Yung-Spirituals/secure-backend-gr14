@@ -20,7 +20,7 @@ public class Order {
     @JoinColumn(name = "user_id")
     private User user;
 
-    private Long userId;
+    private Long idOfUser;
 
     private String username;
 
@@ -36,7 +36,7 @@ public class Order {
         this.user = user;
         this.quantity = quantity;
         this.processed = false;
-        this.userId = user.getId();
+        this.idOfUser = user.getId();
         this.username = user.getUsername();
     }
 
@@ -62,16 +62,16 @@ public class Order {
 
     public void setUser(User user) {
         this.user = user;
-        this.userId = user.getId();
+        this.idOfUser = user.getId();
         this.username = user.getUsername();
     }
 
     public Long getUserId() {
-        return this.userId;
+        return this.idOfUser;
     }
 
     public void setUserId(Long userId) {
-        this.userId = userId;
+        this.idOfUser = userId;
     }
 
     public String getUsername() {

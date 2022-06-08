@@ -3,7 +3,6 @@ package no.ntnu.secureBackendGr14.models;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity(name = "users")
