@@ -21,6 +21,10 @@ public class AccessUserDetails implements UserDetails {
 
     private final List<GrantedAuthority> authorities = new LinkedList<>();
 
+    /**
+     * Constructor of access user details.
+     * @param user
+     */
     public AccessUserDetails(User user) {
         this.username = user.getUsername();
         this.password = user.getPassword();

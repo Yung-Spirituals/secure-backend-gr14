@@ -22,11 +22,10 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-
     /**
      * Request to return all the products from the database.
      *
-     * @return
+     * @return all the products from the database.
      */
     @GetMapping("/get-products")
     public ResponseEntity<?> getProducts() {
@@ -49,7 +48,6 @@ public class ProductController {
             return new ResponseEntity<>(status, HttpStatus.BAD_REQUEST);
         }
     }
-
 
     /**
      * Delete a product by id from the database. This is only doable through an admin user.

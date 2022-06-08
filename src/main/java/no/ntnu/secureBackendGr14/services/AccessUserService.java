@@ -19,7 +19,6 @@ public class AccessUserService implements UserDetailsService {
 
     /**
      * Finds the user by username, if the user is not found, it throws an exception.
-     *
      * @param username to be found.
      * @return
      * @throws UsernameNotFoundException

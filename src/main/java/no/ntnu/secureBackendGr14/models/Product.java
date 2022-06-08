@@ -36,11 +36,10 @@ public class Product {
 
     /**
      * Creates an instance of a product.
-     *
-     * @param name        name of the product.
-     * @param price       price of the product.
+     * @param name name of the product.
+     * @param price price of the product.
      * @param description description of the product.
-     * @param image_path  image path of the product.
+     * @param image_path image path of the product.
      */
     public Product(String name, int price, String description, String image_path) {
         this.name = name;

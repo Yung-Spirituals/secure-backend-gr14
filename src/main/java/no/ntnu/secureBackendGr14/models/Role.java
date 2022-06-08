@@ -10,47 +10,78 @@ import java.util.Set;
 @Entity(name = "roles")
 public class Role {
 
-    @Id
-    @GeneratedValue
-    private Long id;
+  @Id
+  @GeneratedValue
+  private Long id;
 
-    @ManyToMany(mappedBy = "roles")
-    private Set<User> users = new LinkedHashSet<>();
+  @ManyToMany(mappedBy = "roles")
+  private Set<User> users = new LinkedHashSet<>();
 
-    private String name;
+  private String name;
 
-    public Role() {
-    }
+  public Role() {
+  }
 
-    public Role(String name) {
-        this.name = name;
-    }
+  /**
+   * Constructor for role.
+   *
+   * @param name of role.
+   */
+  public Role(String name) {
+    this.name = name;
+  }
 
-    public Long getId() {
-        return this.id;
-    }
+  /**
+   * Get id of the role.
+   *
+   * @return id of role.
+   */
+  public Long getId() {
+    return this.id;
+  }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  /**
+   * Set if for role.
+   *
+   * @param id to be set.
+   */
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public Set<User> getUsers() {
-        return this.users;
-    }
+  /**
+   * Get the users that have that one role.
+   *
+   * @return users that have that one role.
+   */
+  public Set<User> getUsers() {
+    return this.users;
+  }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
+  /**
+   * Sets a role to a group of users.
+   *
+   * @param users that get the role.
+   */
+  public void setUsers(Set<User> users) {
+    this.users = users;
+  }
 
-    public void addUser(User user) {
-        this.users.add(user);
-    }
+  /**
+   * Adds user to the role.
+   *
+   * @param user to get the role.
+   */
+  public void addUser(User user) {
+    this.users.add(user);
+  }
 
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+  /**
+   * Returns name of the role.
+   *
+   * @return name of the role.
+   */
+  public String getName() {
+    return this.name;
+  }
 }

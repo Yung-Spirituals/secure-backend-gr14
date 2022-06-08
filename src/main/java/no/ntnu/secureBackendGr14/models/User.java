@@ -33,7 +33,6 @@ public class User {
     public User() {
     }
 
-
     /**
      * Creates an instance of a user.
      *

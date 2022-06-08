@@ -30,12 +30,12 @@ public class CartController {
     }
 
     /**
-     * Add products to the shopping cart.
+     * Adds or updates shopping cart.
      *
-     * @param productId
-     * @param quantity
-     * @param authorization
-     * @return
+     * @param productId what product to add to cart.
+     * @param quantity how many of the products to add to cart.
+     * @param authorization jwt token used to identify user.
+     * @return response entity ok or bad request.
      */
     @PostMapping("/update-cart/{productId}/{quantity}")
     public ResponseEntity<?> updateCart(@PathVariable Long productId,
@@ -49,6 +49,12 @@ public class CartController {
         }
     }
 
+    /**
+     * Deletes a shopping cart with the specific product belonging to this specific user.
+     * @param authorization jwt token used to identify user.
+     * @param productId of the product.
+     * @return response entity ok or bad request.
+     */
     @DeleteMapping("/delete-cart/{productId}")
     public ResponseEntity<?> removeCart(@RequestHeader("authorization") String authorization,
                                         @PathVariable Long productId) {

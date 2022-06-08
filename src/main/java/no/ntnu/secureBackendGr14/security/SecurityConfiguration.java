@@ -86,8 +86,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * This is needed since Spring Boot 2.0, see
-     * https://stackoverflow.com/questions/52243774/consider-defining-a-bean-of-type-org-springframework-security-authentication-au
+     * This is needed since Spring Boot 2.0
      *
      * @return
      * @throws Exception
