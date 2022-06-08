@@ -5,14 +5,7 @@ import no.ntnu.secureBackendGr14.services.ShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
@@ -42,7 +35,7 @@ public class CartController {
    * @param authorization
    * @return
    */
-  @PutMapping("/update-cart/{productId}/{quantity}")
+  @PostMapping("/update-cart/{productId}/{quantity}")
   public ResponseEntity<?> updateCart(@PathVariable Long productId,
                                       @PathVariable Integer quantity,
                                       @RequestHeader("authorization") String authorization){
