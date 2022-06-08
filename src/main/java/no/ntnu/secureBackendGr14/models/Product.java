@@ -1,8 +1,7 @@
 package no.ntnu.secureBackendGr14.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "products")
 public class Product {
@@ -18,6 +17,9 @@ public class Product {
     private String description;
 
     private String image_path;
+
+    @OneToMany(cascade = {CascadeType.REMOVE})
+    private List<ShoppingCart> ShoppingCarts;
 
     public Product() {
     }

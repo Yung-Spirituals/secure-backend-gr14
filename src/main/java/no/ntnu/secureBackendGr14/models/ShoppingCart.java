@@ -14,9 +14,6 @@ public class ShoppingCart {
     @ManyToOne
     private Product product;
 
-    @OneToMany(cascade = {CascadeType.REMOVE})
-    private List<ShoppingCart> ShoppingCarts;
-
     @ManyToOne
     private User user;
 
