@@ -1,9 +1,12 @@
 package no.ntnu.secureBackendGr14.Controllers;
 
+import no.ntnu.secureBackendGr14.models.Order;
 import no.ntnu.secureBackendGr14.security.JwtUtil;
 import no.ntnu.secureBackendGr14.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -15,6 +18,11 @@ public class OrderController {
 
     @Autowired
     private JwtUtil jwtUtil;
+
+    @GetMapping("/all-orders")
+    public List<Order> getAllOrders(){
+        return orderService.getAllOrders();
+    }
 
     @PostMapping("/new-order")
     public void newOrder(@RequestHeader("authorization") String authorization){
