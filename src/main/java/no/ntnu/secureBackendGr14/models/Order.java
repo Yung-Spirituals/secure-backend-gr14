@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 @Entity(name = "orders")
 public class Order {
+
     @Id
     @GeneratedValue
     private Long id;
@@ -18,9 +19,10 @@ public class Order {
 
     private boolean processed;
 
-    public Order(){}
+    public Order() {
+    }
 
-    public Order(Product product, User user, Integer quantity){
+    public Order(Product product, User user, Integer quantity) {
         this.product = product;
         this.user = user;
         this.quantity = quantity;

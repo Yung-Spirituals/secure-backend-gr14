@@ -16,8 +16,10 @@ import java.util.function.Function;
  */
 @Component
 public class JwtUtil {
+
     @Value("${jwt_secret_key}")
     private String SECRET_KEY;
+
     /**
      * Key inside JWT token where roles are stored
      */
@@ -80,6 +82,26 @@ public class JwtUtil {
 
     private Boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
+    }
+
+    /**
+     * Removes the first 7 chars of the string.
+     *
+     * @param authHeader entire string.
+     * @return string without first 8 chars.
+     */
+    private String getJwtFromHeader(String authHeader) {
+        return authHeader.substring(7);
+    }
+
+    /**
+     * Reads the username from the authentication token.
+     *
+     * @param authorization the token.
+     * @return username.
+     */
+    public String getUsername(String authorization) {
+        return extractUsername(getJwtFromHeader(authorization));
     }
 
 }

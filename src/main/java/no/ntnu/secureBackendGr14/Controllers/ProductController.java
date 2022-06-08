@@ -19,66 +19,70 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/product")
 public class ProductController {
 
-  @Autowired
-  private ProductService productService;
+    @Autowired
+    private ProductService productService;
 
 
-  /**
-   * Request to return all the products from the database.
-   * @return
-   */
-  @GetMapping("/get-products")
-  public ResponseEntity<?> getProducts() {
-    return new ResponseEntity<>(productService.getProducts(), HttpStatus.OK);
-  }
-
-
-  /**
-   * Request to add a new product to the database. This is only doable through an admin user.
-   * @param product to be added.
-   * @return HttpStatus Ok or HttpStatus Bad_request.
-   */
-  @PostMapping("/add-product")
-  public ResponseEntity<?> addProduct(@RequestBody Product product) {
-    String status = productService.add(product);
-    if (status == null) {
-      return new ResponseEntity<>(HttpStatus.OK);
-    } else {
-      return new ResponseEntity<>(status, HttpStatus.BAD_REQUEST);
+    /**
+     * Request to return all the products from the database.
+     *
+     * @return
+     */
+    @GetMapping("/get-products")
+    public ResponseEntity<?> getProducts() {
+        return new ResponseEntity<>(productService.getProducts(), HttpStatus.OK);
     }
-  }
 
 
-  /**
-   * Delete a product by id from the database. This is only doable through an admin user.
-   * @param productId to be deleted
-   * @return HttpStatus Ok or HttpStatus Bad_request.
-   */
-  @DeleteMapping("/delete-product/{productId}")
-  public ResponseEntity<?> deleteProduct(@PathVariable Long productId) {
-    String status = productService.delete(productId);
-    if (status == null) {
-      return new ResponseEntity<>(HttpStatus.OK);
-    } else {
-      return new ResponseEntity<>(status, HttpStatus.BAD_REQUEST);
+    /**
+     * Request to add a new product to the database. This is only doable through an admin user.
+     *
+     * @param product to be added.
+     * @return HttpStatus Ok or HttpStatus Bad_request.
+     */
+    @PostMapping("/add-product")
+    public ResponseEntity<?> addProduct(@RequestBody Product product) {
+        String status = productService.add(product);
+        if (status == null) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(status, HttpStatus.BAD_REQUEST);
+        }
     }
-  }
 
-  /**
-   * Update existing product in the database. Sends an instance of a product with the desired
-   * attribute values. This is only doable through an admin user.
-   * @param productId which item to be updated.
-   * @param updatedProduct product to be updated.
-   * @return HttpStatus Ok or HttpStatus Bad_request.
-   */
-  @PostMapping("/update-product/{productId}")
-  public ResponseEntity<?> updateProduct(@PathVariable Long productId,
-                                         @RequestBody Product updatedProduct) {
-    String status = productService.update(productId, updatedProduct);
-    if (status == null) {
-      return new ResponseEntity<>(HttpStatus.OK);
-    } else {
-      return new ResponseEntity<>(status, HttpStatus.BAD_REQUEST);
+
+    /**
+     * Delete a product by id from the database. This is only doable through an admin user.
+     *
+     * @param productId to be deleted
+     * @return HttpStatus Ok or HttpStatus Bad_request.
+     */
+    @DeleteMapping("/delete-product/{productId}")
+    public ResponseEntity<?> deleteProduct(@PathVariable Long productId) {
+        String status = productService.delete(productId);
+        if (status == null) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(status, HttpStatus.BAD_REQUEST);
+        }
     }
-  }
+
+    /**
+     * Update existing product in the database. Sends an instance of a product with the desired
+     * attribute values. This is only doable through an admin user.
+     *
+     * @param productId      which item to be updated.
+     * @param updatedProduct product to be updated.
+     * @return HttpStatus Ok or HttpStatus Bad_request.
+     */
+    @PostMapping("/update-product/{productId}")
+    public ResponseEntity<?> updateProduct(@PathVariable Long productId,
+                                           @RequestBody Product updatedProduct) {
+        String status = productService.update(productId, updatedProduct);
+        if (status == null) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(status, HttpStatus.BAD_REQUEST);
+        }
+    }
 }

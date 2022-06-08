@@ -37,7 +37,7 @@ public class ShoppingCartService {
             }
             if (!alreadyInCart || user.getShoppingCarts().isEmpty()) {
                 shoppingCartRepository.save(
-                    new ShoppingCart(user, productRepository.getById(productId), quantity));
+                        new ShoppingCart(user, productRepository.getById(productId), quantity));
             }
         }
         return null;
@@ -77,7 +77,7 @@ public class ShoppingCartService {
             shoppingCartRepository.deleteAll(userRepository.findByUsername(username).get().getShoppingCarts());
             shoppingCartRepository.flush();
             return true;
-        }else {
+        } else {
             return false;
         }
     }

@@ -25,10 +25,13 @@ public class AuthenticationController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
+
     @Autowired
     private UserDetailsService userDetailsService;
+
     @Autowired
     private UserService userService;
+
     @Autowired
     private JwtUtil jwtUtil;
 
@@ -37,6 +40,7 @@ public class AuthenticationController {
      * Checks if the user exist and that the credentials are correct. Tries to authenticate, if it
      * succeeds then a new jwt get created using the user details and then returns the token to the client.
      * If it fails then the server sends a HttpStatus unauthorized.
+     *
      * @param authenticationRequest username and password.
      * @return a jwt token to the client.
      */
@@ -57,16 +61,16 @@ public class AuthenticationController {
     /**
      * Calls for the register user method in the userService class, this method returns an error
      * message if something goes wrong.
+     *
      * @param user username and password.
      * @return HttpStatus Ok or HttpStatus bad_request.
      */
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody AuthenticationRequest user) {
         String error = userService.registerUser(user.getUsername(), user.getPassword());
-        if(error == null){
+        if (error == null) {
             return new ResponseEntity<>(HttpStatus.OK);
-        }
-        else{
+        } else {
             return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
         }
     }

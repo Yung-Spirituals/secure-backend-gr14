@@ -13,23 +13,25 @@ import java.util.Optional;
 
 @Service
 public class AccessUserService implements UserDetailsService {
-  @Autowired
-  UserRepository userRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     /**
      * Finds the user by username, if the user is not found, it throws an exception.
+     *
      * @param username to be found.
      * @return
      * @throws UsernameNotFoundException
      */
-  @Override
-  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    Optional<User> user = userRepository.findByUsername(username);
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Optional<User> user = userRepository.findByUsername(username);
 
-    if (user.isPresent()) {
-      return new AccessUserDetails((user.get()));
-    } else {
-      throw new UsernameNotFoundException(username + " not found!");
+        if (user.isPresent()) {
+            return new AccessUserDetails((user.get()));
+        } else {
+            throw new UsernameNotFoundException(username + " not found!");
+        }
     }
-  }
 }

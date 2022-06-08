@@ -12,8 +12,11 @@ import java.util.List;
 import java.util.Set;
 
 public class AccessUserDetails implements UserDetails {
+
     private final String username;
+
     private final String password;
+
     private final boolean active;
 
     private final List<GrantedAuthority> authorities = new LinkedList<>();

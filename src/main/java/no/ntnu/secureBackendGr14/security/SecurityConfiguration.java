@@ -24,11 +24,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
     /**
      * A service providing our users from the database
      */
     @Autowired
     private UserDetailsService userDetailsService;
+
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
 
@@ -67,6 +69,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/cart/update-cart").permitAll()
                 .antMatchers("/cart/delete-cart").permitAll()
                 .antMatchers("/cart/empty-cart").permitAll()
+                .antMatchers("/order/new-order").permitAll()
+                .antMatchers("/order/delete-order").hasRole("ADMIN")
+                .antMatchers("/order/delete-all-orders").hasRole("ADMIN")
+                .antMatchers("/order/process").hasRole("ADMIN")
+                .antMatchers("/order/revert-processed-order").hasRole("ADMIN")
                 .antMatchers("/authenticate/register").anonymous()
                 .antMatchers("/authenticate/login").anonymous()
                 .anyRequest().authenticated()

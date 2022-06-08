@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 @Entity(name = "shopping_carts")
 public class ShoppingCart {
+
     @Id
     @GeneratedValue
     private Long id;
@@ -25,7 +26,8 @@ public class ShoppingCart {
         return user;
     }
 
-    public ShoppingCart() {}
+    public ShoppingCart() {
+    }
 
     public ShoppingCart(User user, Product product, Integer quantity) {
         this.user = user;

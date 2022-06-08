@@ -21,7 +21,7 @@ public class Product {
 
     private String image_path;
 
-    @OneToMany(mappedBy = "product",cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private Set<ShoppingCart> shoppingCarts = new HashSet<>();
 
     public Product() {

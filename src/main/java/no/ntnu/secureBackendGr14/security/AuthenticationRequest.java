@@ -3,6 +3,7 @@ package no.ntnu.secureBackendGr14.security;
 public class AuthenticationRequest {
 
     private String username;
+
     private String password;
 
     public AuthenticationRequest() {

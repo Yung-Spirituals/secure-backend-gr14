@@ -9,74 +9,75 @@ import java.util.List;
 
 @Service
 public class ProductService {
-  @Autowired
-  private ProductRepository productRepository;
 
-  public List<Product> getProducts() {
-    return productRepository.findAll();
-  }
+    @Autowired
+    private ProductRepository productRepository;
 
-  public String update(Long productId, Product updatedInfo) {
-    String errorMessage = null;
-    if (productExists(productId) && verifyProduct(updatedInfo)) {
-      try {
-        Product product = productRepository.getById(productId);
-        product.setName(updatedInfo.getName());
-        product.setPrice(updatedInfo.getPrice());
-        product.setDescription(updatedInfo.getDescription());
-        product.setImage_path(updatedInfo.getImage_path());
-        productRepository.save(product);
-      } catch (Exception e) {
-        errorMessage = "Error saving product to database: " + e.getMessage();
-      }
-    } else {
-      errorMessage = "Product with given ID not found";
+    public List<Product> getProducts() {
+        return productRepository.findAll();
     }
-    return errorMessage;
-  }
 
-
-  public String delete(Long productId) {
-    String errorMessage = null;
-    if (productExists(productId)) {
-      try {
-        productRepository.delete(productRepository.getById(productId));
-        productRepository.flush();
-      } catch (Exception e) {
-        errorMessage = "Error deleting product from database: " + e.getMessage();
-      }
-    } else {
-      errorMessage = "Product does not exist!";
+    public String update(Long productId, Product updatedInfo) {
+        String errorMessage = null;
+        if (productExists(productId) && verifyProduct(updatedInfo)) {
+            try {
+                Product product = productRepository.getById(productId);
+                product.setName(updatedInfo.getName());
+                product.setPrice(updatedInfo.getPrice());
+                product.setDescription(updatedInfo.getDescription());
+                product.setImage_path(updatedInfo.getImage_path());
+                productRepository.save(product);
+            } catch (Exception e) {
+                errorMessage = "Error saving product to database: " + e.getMessage();
+            }
+        } else {
+            errorMessage = "Product with given ID not found";
+        }
+        return errorMessage;
     }
-    return errorMessage;
-  }
 
-  public String add(Product product) {
-    String errorMessage = null;
-    if (!verifyProduct(product) && productRepository.findByName(product.getName()).isPresent()) {
-      errorMessage = "Product data invalid!";
-    }
-    if (errorMessage == null) {
-      try {
-        productRepository.save(new Product(product.getName(), product.getPrice(),
-            product.getDescription(), product.getImage_path()));
-      } catch (Exception e) {
-        errorMessage = "Error adding product to database: " + e.getMessage();
-      }
-    }
-    return errorMessage;
-  }
 
-  private boolean verifyProduct(Product product) {
-    return !product.getName().isBlank() && !product.getDescription().isBlank()
-        && !product.getImage_path().isBlank();
-  }
-
-  private boolean productExists(Long productId) {
-    if (productId != null) {
-      return productRepository.findById(productId).isPresent();
-    } else {
-      return false;
+    public String delete(Long productId) {
+        String errorMessage = null;
+        if (productExists(productId)) {
+            try {
+                productRepository.delete(productRepository.getById(productId));
+                productRepository.flush();
+            } catch (Exception e) {
+                errorMessage = "Error deleting product from database: " + e.getMessage();
+            }
+        } else {
+            errorMessage = "Product does not exist!";
+        }
+        return errorMessage;
     }
-  }
+
+    public String add(Product product) {
+        String errorMessage = null;
+        if (!verifyProduct(product) && productRepository.findByName(product.getName()).isPresent()) {
+            errorMessage = "Product data invalid!";
+        }
+        if (errorMessage == null) {
+            try {
+                productRepository.save(new Product(product.getName(), product.getPrice(),
+                        product.getDescription(), product.getImage_path()));
+            } catch (Exception e) {
+                errorMessage = "Error adding product to database: " + e.getMessage();
+            }
+        }
+        return errorMessage;
+    }
+
+    private boolean verifyProduct(Product product) {
+        return !product.getName().isBlank() && !product.getDescription().isBlank()
+                && !product.getImage_path().isBlank();
+    }
+
+    private boolean productExists(Long productId) {
+        if (productId != null) {
+            return productRepository.findById(productId).isPresent();
+        } else {
+            return false;
+        }
+    }
 }

@@ -21,10 +21,4 @@ public class ApiController {
     public String testAdmin() {
         return "This is admin level!!! ;D";
     }
-
-    //TODO: Implement this
-    /*@PostMapping("/purchase")
-    public String makeOrder(@RequestHeader Authorization authorization){
-        //logic
-    }*/
 }
