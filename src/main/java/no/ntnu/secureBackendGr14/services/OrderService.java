@@ -40,10 +40,14 @@ public class OrderService {
     }
 
     public void processOrder(Long id) {
-        orderRepository.getById(id).setProcessed(true);
+        Order order = orderRepository.getById(id);
+        order.setProcessed(true);
+        orderRepository.save(order);
     }
 
     public void revertProcessedOrder(Long id) {
-        orderRepository.getById(id).setProcessed(false);
+        Order order = orderRepository.getById(id);
+        order.setProcessed(false);
+        orderRepository.save(order);
     }
 }
