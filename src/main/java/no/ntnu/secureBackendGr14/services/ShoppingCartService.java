@@ -77,11 +77,12 @@ public class ShoppingCartService {
 
     public boolean deleteCarts(String username) {
         if (userRepository.findByUsername(username).isPresent()) {
-            shoppingCartRepository.deleteAll(
-                userRepository.findByUsername(username).get().getShoppingCarts());
+            shoppingCartRepository.deleteAll(userRepository.findByUsername(username).get().getShoppingCarts());
+            shoppingCartRepository.flush();
             return true;
+        }else {
+            return false;
         }
-        return false;
     }
 
     public List<ShoppingCart> getAllCarts() {

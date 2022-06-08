@@ -41,6 +41,7 @@ public class ProductService {
     if (productExists(productId)) {
       try {
         productRepository.delete(productRepository.getById(productId));
+        productRepository.flush();
       } catch (Exception e) {
         errorMessage = "Error deleting product from database: " + e.getMessage();
       }
