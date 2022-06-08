@@ -60,7 +60,7 @@ public class CartController {
 
   @DeleteMapping("/empty-cart")
   public ResponseEntity<?> emptyCart(@RequestHeader("authorization") String authorization){
-    if (shoppingCartService.deleteCarts(authorization)){
+    if (shoppingCartService.deleteCarts(getUsername(authorization))){
       return new ResponseEntity<>(HttpStatus.OK);
     } else {
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
