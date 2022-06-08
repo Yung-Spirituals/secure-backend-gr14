@@ -1,4 +1,5 @@
 package no.ntnu.secureBackendGr14.Controllers;
+
 import no.ntnu.secureBackendGr14.models.Product;
 import no.ntnu.secureBackendGr14.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
 @CrossOrigin
-@RequestMapping("/api")
+@RequestMapping("/product")
 public class ProductController {
+
   @Autowired
   private ProductService productService;
 
@@ -27,7 +28,7 @@ public class ProductController {
    * Request to return all the products from the database.
    * @return
    */
-  @GetMapping("/get-products")
+  @GetMapping("/get-product")
   public ResponseEntity<?> getProducts() {
     return new ResponseEntity<>(productService.getProducts(), HttpStatus.OK);
   }
@@ -38,7 +39,7 @@ public class ProductController {
    * @param product to be added.
    * @return HttpStatus Ok or HttpStatus Bad_request.
    */
-  @PostMapping("/product")
+  @PostMapping("/add-product")
   public ResponseEntity<?> addProduct(@RequestBody Product product) {
     String status = productService.add(product);
     if (status == null) {
@@ -54,7 +55,7 @@ public class ProductController {
    * @param productId to be deleted
    * @return HttpStatus Ok or HttpStatus Bad_request.
    */
-  @DeleteMapping("/product/{productId}")
+  @DeleteMapping("/delete-product/{productId}")
   public ResponseEntity<?> deleteProduct(@PathVariable Long productId) {
     String status = productService.delete(productId);
     if (status == null) {
@@ -71,7 +72,7 @@ public class ProductController {
    * @param updatedProduct product to be updated.
    * @return HttpStatus Ok or HttpStatus Bad_request.
    */
-  @PutMapping("/product/{productId}")
+  @PutMapping("/update-product/{productId}")
   public ResponseEntity<?> updateProduct(@PathVariable Long productId,
                                          @RequestBody Product updatedProduct) {
     String status = productService.update(productId, updatedProduct);

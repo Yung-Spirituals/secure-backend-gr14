@@ -1,11 +1,12 @@
 package no.ntnu.secureBackendGr14.Controllers;
-import org.springframework.web.bind.annotation.*;
 
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
 @RequestMapping("/api")
 public class ApiController {
+
     @GetMapping("/")
     public String testPublic() {
         return "This is public :)";
