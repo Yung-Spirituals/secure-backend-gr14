@@ -39,7 +39,7 @@ public class CartController {
   public ResponseEntity<?> updateCart(@PathVariable Long productId,
                                       @PathVariable Integer quantity,
                                       @RequestHeader("authorization") String authorization){
-    String status = shoppingCartService.addToCarts(getUsername(authorization), productId, quantity);
+    String status = shoppingCartService.updateCart(getUsername(authorization), productId, quantity);
     if (status == null) {
       return new ResponseEntity<>(HttpStatus.OK);
     } else {
@@ -50,7 +50,7 @@ public class CartController {
   @DeleteMapping("/delete-cart/{productId}")
   public ResponseEntity<?> removeCart(@RequestHeader("authorization") String authorization,
                                       @PathVariable Long productId){
-    String status = shoppingCartService.removeFromCarts(getUsername(authorization), productId);
+    String status = shoppingCartService.removeFromCart(getUsername(authorization), productId);
     if (status == null){
       return new ResponseEntity<>(HttpStatus.OK);
     } else {

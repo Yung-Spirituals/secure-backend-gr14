@@ -6,12 +6,8 @@ import no.ntnu.secureBackendGr14.repositories.ProductRepository;
 import no.ntnu.secureBackendGr14.repositories.ShoppingCartRepository;
 import no.ntnu.secureBackendGr14.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -27,7 +23,7 @@ public class ShoppingCartService {
     private ProductRepository productRepository;
 
     //TODO: make error message more specific
-    public String addToCarts(String username, Long productId, Integer quantity) {
+    public String updateCart(String username, Long productId, Integer quantity) {
         boolean alreadyInCart = false;
         if (userRepository.findByUsername(username).isPresent() && productRepository.existsById(productId)) {
             User user = userRepository.findByUsername(username).get();
@@ -48,14 +44,15 @@ public class ShoppingCartService {
     }
 
     //TODO: make error message more specific
-    public String removeFromCarts(String username, Long productId) {
+    public String removeFromCart(String username, Long productId) {
         String errorMessage = null;
         if (userRepository.findByUsername(username).isPresent()) {
             User user = userRepository.findByUsername(username).get();
-            if (user.getShoppingCarts().isEmpty()) {
+            if (!user.getShoppingCarts().isEmpty()) {
                 for (ShoppingCart shoppingCart : user.getShoppingCarts()) {
                     if (shoppingCart.getProduct().getId().equals(productId)) {
                         shoppingCartRepository.delete(shoppingCart);
+                        shoppingCartRepository.flush();
                     }
                 }
             }
