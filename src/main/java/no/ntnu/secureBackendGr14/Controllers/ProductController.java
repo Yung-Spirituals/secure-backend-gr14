@@ -28,7 +28,7 @@ public class ProductController {
    * Request to return all the products from the database.
    * @return
    */
-  @GetMapping("/get-product")
+  @GetMapping("/get-products")
   public ResponseEntity<?> getProducts() {
     return new ResponseEntity<>(productService.getProducts(), HttpStatus.OK);
   }
