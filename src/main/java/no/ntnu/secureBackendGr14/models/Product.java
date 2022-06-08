@@ -1,5 +1,7 @@
 package no.ntnu.secureBackendGr14.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.List;
@@ -21,8 +23,13 @@ public class Product {
 
     private String image_path;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private Set<ShoppingCart> shoppingCarts = new HashSet<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
+    private Set<Order> orders = new HashSet<>();
 
     public Product() {
     }
