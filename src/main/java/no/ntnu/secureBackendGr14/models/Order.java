@@ -32,7 +32,6 @@ public class Order {
 
     private Integer quantity;
 
-    @CreationTimestamp
     private Timestamp dateCreated;
 
     public Order() {
@@ -46,6 +45,7 @@ public class Order {
         this.idOfUser = user.getId();
         this.username = user.getUsername();
         this.dateProcessed = null;
+        this.dateCreated = new Timestamp(System.currentTimeMillis());
     }
 
     public Long getId() {
