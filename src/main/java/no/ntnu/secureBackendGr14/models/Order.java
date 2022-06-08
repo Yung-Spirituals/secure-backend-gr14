@@ -65,11 +65,19 @@ public class Order {
     }
 
     public Long getUserId() {
-        return userId;
+        return this.userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {
-        return username;
+        return this.username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public Integer getQuantity() {
