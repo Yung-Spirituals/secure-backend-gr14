@@ -1,6 +1,5 @@
 package no.ntnu.secureBackendGr14.Controllers;
 
-import no.ntnu.secureBackendGr14.security.AccessUserDetails;
 import no.ntnu.secureBackendGr14.security.AuthenticationResponse;
 import no.ntnu.secureBackendGr14.security.AuthenticationRequest;
 import no.ntnu.secureBackendGr14.security.JwtUtil;
@@ -11,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.CrossOrigin;

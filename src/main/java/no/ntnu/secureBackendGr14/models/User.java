@@ -17,10 +17,10 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new LinkedHashSet<>();
 
-    @OneToMany(cascade = {CascadeType.REMOVE})
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.REMOVE})
     private List<ShoppingCart> ShoppingCarts;
 
-    @OneToMany(cascade = {CascadeType.REMOVE})
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.REMOVE})
     private List<Order> orders;
 
     private String username;

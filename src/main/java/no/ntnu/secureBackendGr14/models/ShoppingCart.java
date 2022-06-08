@@ -3,6 +3,7 @@ package no.ntnu.secureBackendGr14.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "shopping_carts")
 public class ShoppingCart {
@@ -10,11 +11,13 @@ public class ShoppingCart {
     @GeneratedValue
     private Long id;
 
-    @ManyToOne(cascade = {CascadeType.REFRESH})
+    @ManyToOne
     private Product product;
 
-    @JsonIgnore
-    @ManyToOne(cascade = {CascadeType.REFRESH})
+    @OneToMany(cascade = {CascadeType.REMOVE})
+    private List<ShoppingCart> ShoppingCarts;
+
+    @ManyToOne
     private User user;
 
     private int quantity;
