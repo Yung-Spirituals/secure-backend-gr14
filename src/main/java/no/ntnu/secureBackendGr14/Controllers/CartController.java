@@ -75,12 +75,12 @@ public class CartController {
   }
 
   /**
-   * Removes the first 8 chars of the string.
+   * Removes the first 7 chars of the string.
    * @param authHeader entire string.
    * @return string without first 8 chars.
    */
   private String getJwtFromHeader(String authHeader){
-    return authHeader.substring(8);
+    return authHeader.substring(7);
   }
 
   /**
