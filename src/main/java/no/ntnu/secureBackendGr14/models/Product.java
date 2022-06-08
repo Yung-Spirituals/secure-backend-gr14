@@ -1,7 +1,10 @@
 package no.ntnu.secureBackendGr14.models;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 
 @Entity(name = "products")
 public class Product {
@@ -17,6 +20,9 @@ public class Product {
     private String description;
 
     private String image_path;
+
+    @OneToMany(mappedBy = "product",cascade = CascadeType.REMOVE)
+    private Set<ShoppingCart> shoppingCarts = new HashSet<>();
 
     public Product() {
     }

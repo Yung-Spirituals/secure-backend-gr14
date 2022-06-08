@@ -1,6 +1,7 @@
 package no.ntnu.secureBackendGr14.models;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,10 +19,10 @@ public class User {
     private Set<Role> roles = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = {CascadeType.REMOVE})
-    private List<ShoppingCart> ShoppingCarts;
+    private Set<ShoppingCart> ShoppingCarts = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = {CascadeType.REMOVE})
-    private List<Order> orders;
+    private Set<Order> orders = new HashSet<>();
 
     private String username;
     private String password;
@@ -78,19 +79,19 @@ public class User {
         this.roles = roles;
     }
 
-    public List<ShoppingCart> getShoppingCarts() {
+    public Set<ShoppingCart> getShoppingCarts() {
         return this.ShoppingCarts;
     }
 
-    public void setShoppingCarts(List<ShoppingCart> shoppingCarts) {
+    public void setShoppingCarts(Set<ShoppingCart> shoppingCarts) {
         this.ShoppingCarts = shoppingCarts;
     }
 
-    public List<Order> getOrders() {
+    public Set<Order> getOrders() {
         return this.orders;
     }
 
-    public void setOrders(List<Order> orders) {
+    public void setOrders(Set<Order> orders) {
         this.orders = orders;
     }
 
