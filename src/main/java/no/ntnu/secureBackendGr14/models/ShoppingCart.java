@@ -1,5 +1,7 @@
 package no.ntnu.secureBackendGr14.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity(name = "shopping_carts")
@@ -12,6 +14,7 @@ public class ShoppingCart {
     @JoinColumn(name = "product_id")
     private Product product;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -44,14 +47,6 @@ public class ShoppingCart {
 
     public void setProduct(Product product) {
         this.product = product;
-    }
-
-    public String getUsername() {
-        return this.user.getUsername();
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public int getQuantity() {
