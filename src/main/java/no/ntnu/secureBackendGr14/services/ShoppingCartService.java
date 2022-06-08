@@ -35,6 +35,7 @@ public class ShoppingCartService {
                 if (shoppingCart.getProduct().getId().equals(productId)) {
                     ShoppingCart cart = shoppingCartRepository.getById(shoppingCart.getId());
                     cart.setQuantity(quantity);
+                    shoppingCartRepository.save(cart);
                     alreadyInCart = true;
                 }
             }
