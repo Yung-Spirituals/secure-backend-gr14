@@ -1,8 +1,10 @@
 package no.ntnu.secureBackendGr14.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity(name = "orders")
 public class Order {
@@ -10,6 +12,10 @@ public class Order {
     @Id
     @GeneratedValue
     private Long id;
+
+    private boolean processed;
+
+    private Timestamp dateProcessed;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
@@ -26,7 +32,8 @@ public class Order {
 
     private Integer quantity;
 
-    private boolean processed;
+    @CreationTimestamp
+    private Timestamp dateCreated;
 
     public Order() {
     }
@@ -38,6 +45,7 @@ public class Order {
         this.processed = false;
         this.idOfUser = user.getId();
         this.username = user.getUsername();
+        this.dateProcessed = null;
     }
 
     public Long getId() {
@@ -66,11 +74,11 @@ public class Order {
         this.username = user.getUsername();
     }
 
-    public Long getUserId() {
+    public Long getIdOfUser() {
         return this.idOfUser;
     }
 
-    public void setUserId(Long userId) {
+    public void setIdOfUser(Long userId) {
         this.idOfUser = userId;
     }
 
@@ -96,5 +104,26 @@ public class Order {
 
     public void setProcessed(boolean processed) {
         this.processed = processed;
+        if (processed){
+            setDateProcessed(new Timestamp(System.currentTimeMillis()));
+        } else {
+            setDateProcessed(null);
+        }
+    }
+
+    public Timestamp getDateCreated() {
+        return this.dateCreated;
+    }
+
+    public void setDateCreated(Timestamp dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public Timestamp getDateProcessed() {
+        return this.dateProcessed;
+    }
+
+    public void setDateProcessed(Timestamp dateProcessed) {
+        this.dateProcessed = dateProcessed;
     }
 }
