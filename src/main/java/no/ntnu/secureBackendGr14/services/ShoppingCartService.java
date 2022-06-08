@@ -29,14 +29,14 @@ public class ShoppingCartService {
     //TODO: make error message more specific
     public String addToCarts(String username, Long productId, Integer quantity) {
         boolean alreadyInCart = false;
-        if (userRepository.findByUsername(username).isPresent()) {
+        if (userRepository.findByUsername(username).isPresent() && productRepository.existsById(productId)) {
             User user = userRepository.findByUsername(username).get();
             for (ShoppingCart shoppingCart : user.getShoppingCarts()) {
                 if (shoppingCart.getProduct().getId().equals(productId)) {
                     ShoppingCart cart = shoppingCartRepository.getById(shoppingCart.getId());
                     cart.setQuantity(quantity);
+                    alreadyInCart = true;
                 }
-                alreadyInCart = true;
             }
             if (!alreadyInCart || user.getShoppingCarts().isEmpty()) {
                 shoppingCartRepository.save(
