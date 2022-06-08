@@ -60,8 +60,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/product").hasRole("ADMIN")
                 .antMatchers("/api/get-products").permitAll()
                 .antMatchers("/api/cart").permitAll()
-                .antMatchers("/api/cart/{productId}/{quantity}").permitAll()
-                .antMatchers("/api/cart/{productId}").permitAll()
                 .antMatchers("/api/").permitAll()
                 .antMatchers("/authenticate/register").anonymous()
                 .antMatchers("/authenticate/login").anonymous()
