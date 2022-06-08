@@ -1,9 +1,6 @@
 package no.ntnu.secureBackendGr14.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
-import java.util.List;
 
 @Entity(name = "shopping_carts")
 public class ShoppingCart {

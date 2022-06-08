@@ -18,9 +18,6 @@ public class Product {
 
     private String image_path;
 
-    @OneToMany(cascade = {CascadeType.REMOVE})
-    private List<ShoppingCart> ShoppingCarts;
-
     public Product() {
     }
 
